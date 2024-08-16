@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>New Post in {{ topic.title }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Post</button>
+    </form>
+
+    <a href="{% url 'topic_detail' topic.pk %}">Back to {{ topic.title }}</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>{{ topic.title }}</h1>
+    <h2>Posts</h2>
+    {% if posts %}
+        <ul>
+            {% for post in posts %}
+                <li><strong>{{ post.author.username }}</strong>: {{ post.content }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No posts yet.</p>
+    {% endif %}
+
+    <!-- Button to create a new post -->
+    <a href="{% url 'new_post' topic.pk %}" style="display: inline-block; padding: 10px 15px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px;">
+        Create New Post
+    </a>
+
+</body>
+</html>
