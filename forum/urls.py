@@ -18,4 +18,9 @@ urlpatterns = [
 
     # Posts
     path('topic/<int:pk>/new_post/', views_post.new_post, name='new_post'),
+    path('posts/<int:pk>/', views_post.post_list_by_topic, name='post_list_by_topic'),
+    path('post/<int:pk>/', views_post.post_detail, name='post_detail'),
+    path('post/<int:pk>/update/', views_post.post_update, name='post_update'),
+    path('post/<int:pk>/delete/', views_post.post_delete, name='post_delete'),
+
 ]
