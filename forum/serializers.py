@@ -16,7 +16,7 @@ class ForumSerializer(serializers.ModelSerializer):
 class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topic
-        fields = '__all__'
+        fields = ['title']
 
     def validate_title(self, value):
         if not value:
@@ -24,10 +24,11 @@ class TopicSerializer(serializers.ModelSerializer):
         return value
 
 
+
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['content']
 
     def validate_content(self, value):
         if not value:
