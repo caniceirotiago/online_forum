@@ -24,7 +24,7 @@ class Topic(models.Model):
 
 class Post(models.Model):
     topic = models.ForeignKey(Topic, related_name='posts', on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=1)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
 
