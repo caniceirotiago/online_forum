@@ -1,26 +1,19 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
 from .views import views_forum, views_topic, views_post
+from .views.views_topic import TopicAPI
+
+api_router = DefaultRouter()
+api_router.register(r'topic', TopicAPI, basename='topics')
+api_router.register(r'forum', views_forum.ForumAPI, basename='forums')
+api_router.register(r'post', views_post.PostAPI, basename='posts')
+
+# GET /forums/2/topics?user_id=3
+# GET /topics?forum_id=2&user_id=3
+# POST /topics {forum_id: 2, ...}
 
 urlpatterns = [
-    # Forums
-    path('forums/', views_forum.forum_list, name='forum_list'),
-    path('forum/', views_forum.forum_create, name='forum_create'),
-    path('forum/<int:pk>/', views_forum.forum_detail, name='forum_detail'),
-    path('forum/<int:pk>/update/', views_forum.forum_update, name='forum_update'),
-    path('forum/<int:pk>/delete/', views_forum.forum_delete, name='forum_delete'),
-
-    # Topics
-    path('forum/<int:pk>/new_topic/', views_topic.new_topic, name='new_topic'),
-    path('topic/<int:pk>/', views_topic.topic_detail, name='topic_detail'),
-    path('topics/<int:pk>/', views_topic.topic_list_by_forum, name='topic_list_by_forum'),
-    path('topic/<int:pk>/update/', views_topic.topic_update, name='topic_update'),
-    path('topic/<int:pk>/delete/', views_topic.topic_delete, name='topic_delete'),
-
-    # Posts
-    path('topic/<int:pk>/new_post/', views_post.new_post, name='new_post'),
-    path('posts/<int:pk>/', views_post.post_list_by_topic, name='post_list_by_topic'),
-    path('post/<int:pk>/', views_post.post_detail, name='post_detail'),
-    path('post/<int:pk>/update/', views_post.post_update, name='post_update'),
-    path('post/<int:pk>/delete/', views_post.post_delete, name='post_delete'),
+    path('', include(api_router.urls)),
 
 ]
